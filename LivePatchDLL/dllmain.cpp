@@ -3,6 +3,8 @@ typedef struct IUnknown IUnknown;
 #include <windows.h>
 #include <iostream>
 #include <string>
+#include "watchdog.h"
+
 #define NEWTHREAD(x) CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)x, NULL, NULL, NULL)
 extern "C" __declspec(dllexport) int StartPatch();
 using namespace std;
@@ -20,8 +22,8 @@ int StartPatch()
 	MessageBox(0, "Press OK to start anti-cheat\nThis will automatically start in non-debug builds.", "Hello", MB_OK);
 
 #endif
-
-
+    watchdog::StartThreadIntegrity();
+    
 	return 0;
 }
 

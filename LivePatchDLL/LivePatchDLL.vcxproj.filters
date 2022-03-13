@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Security">
+      <UniqueIdentifier>{670c5e33-20b3-4cc4-80f4-e9dff265a317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Security\Protections">
+      <UniqueIdentifier>{dc91183c-607c-4ab8-8671-02f8057342ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -24,7 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="watchdog.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Security</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

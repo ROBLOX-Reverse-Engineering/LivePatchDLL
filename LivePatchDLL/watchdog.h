@@ -1,8 +1,7 @@
 #pragma once
 class watchdog
 {
-	void StarThreadIntegrity() {
-
-	}
+public:
+	static void StartThreadIntegrity();
 };
 
