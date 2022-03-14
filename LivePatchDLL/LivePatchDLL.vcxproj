@@ -148,9 +148,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NoDump.cpp" />
     <ClCompile Include="watchdog.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NoDump.h" />
     <ClInclude Include="watchdog.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

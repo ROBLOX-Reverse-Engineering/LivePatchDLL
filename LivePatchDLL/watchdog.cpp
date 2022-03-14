@@ -1,20 +1,15 @@
 #include "watchdog.h"
+// Start Protections
+#include "NoDump.h"
+// End Protections
 #include <future>
 #include <thread>
 #include <chrono>
 #include <iostream>
 
 void watchdog::StartThreadIntegrity() {
-    using namespace std::chrono_literals;
-
-    // Create a packaged_task using some task and get its future.
-    std::packaged_task<void()> task([] {
-        // Start protections (preferably as seperate threads)
-        });
-    auto future = task.get_future();
-
     // Run task on new thread.
-    std::thread t(std::move(task));
+    std::thread t(NoDump::RunEngine);
 
     // Get thread status using wait_for as before.
     //auto status = future.wait_for(0ms);
