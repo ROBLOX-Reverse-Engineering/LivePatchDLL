@@ -8,4 +8,4 @@ public:
 	static void PatchFunction(const int adr, const int func);
 	static void DisableHook(const int adr);
 	static void EnableHook(const int adr);
-};	
+};

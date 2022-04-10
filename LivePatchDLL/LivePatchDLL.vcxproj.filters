@@ -89,5 +89,8 @@
     <ClInclude Include="minhook\src\hde\table64.h">
       <Filter>Source Files\Security\Minhook\src</Filter>
     </ClInclude>
+    <ClInclude Include="Addresses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
