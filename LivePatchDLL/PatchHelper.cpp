@@ -4,10 +4,10 @@ typedef struct IUnknown IUnknown;
 #include "PatchHelper.h"
 #include "minhook\include\MinHook.h"
 
-void PatchHelper::patchString(const int address, const char stringBuffer[])
+void PatchHelper::PatchString(const int address, const char stringBuffer[])
 {
 	char* buffer = reinterpret_cast<char*>(FixAddress(address));
-#if _DEBUG
+#ifdef _DEBUG
 	std::cout << "Address: " << std::hex << address << std::endl;
 	std::cout << "Buffer: " << std::hex << buffer << std::endl;
 #endif
@@ -18,13 +18,23 @@ void PatchHelper::patchString(const int address, const char stringBuffer[])
 	memcpy(buffer, stringBuffer, length);
 	VirtualProtect(buffer, length, oldProtect, nullptr);
 
-#if _DEBUG
+#ifdef _DEBUG
 	std::cout << "New Buffer: " << std::hex << (int)reinterpret_cast<char*>(FixAddress(address)) << std::endl;
 #endif
 }
 
-void PatchHelper::patchFunction(const int adr, const int func)
+void PatchHelper::PatchFunction(const int adr, const int func)
 {
 	MH_CreateHook((LPVOID)(FixAddress(adr)), (LPVOID)func, NULL);
+	MH_EnableHook((LPVOID)adr);
+}
+
+void PatchHelper::DisableHook(const int adr)
+{
+	MH_DisableHook((LPVOID)adr);
+}
+
+void PatchHelper::EnableHook(const int adr)
+{
 	MH_EnableHook((LPVOID)adr);
 }
