@@ -4,10 +4,10 @@ typedef struct IUnknown IUnknown;
 #include <iostream>
 #include <string>
 #include "watchdog.h"
+#include "PatchHelper.h"
 
 #define NEWTHREAD(x) CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)x, NULL, NULL, NULL)
 extern "C" __declspec(dllexport) int StartPatch();
-using namespace std;
 
 int StartPatch()
 {
@@ -19,9 +19,12 @@ int StartPatch()
 	freopen_s(&istream, "CONIN$", "r", stdin);
 	SetConsoleTitle("Debug Console");
 	std::cout << "Hello, world!" << std::endl;
-	MessageBox(0, "Press OK to start anti-cheat\nThis will automatically start in non-debug builds.", "Hello", MB_OK);
+	MessageBox(0, "Press OK to start patch & anti-cheat\nThis will automatically start in non-debug builds.", "Hello", MB_OK);
 
 #endif
+	/*
+        Insert PatchHelper calls here
+    */
     watchdog::StartThreadIntegrity();
     
 	return 0;
@@ -35,8 +38,10 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-		StartPatch(); //   <-- Use this if you want to run this on the UI thread (not recommended) (edit: using it on UI thread as it is it going to start dedicated threads)
-		//NEWTHREAD(StartPatch);
+#ifndef _DEBUG
+        DisableThreadLibraryCalls(hModule); //prevents dll detach
+#endif
+		StartPatch();
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:

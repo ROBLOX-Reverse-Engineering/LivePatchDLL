@@ -1,5 +1,5 @@
 #include <iostream>
-#include "NoDump.h";
+#include "NoDump.h"
 
 void NoDump::RunEngine() {
 

@@ -16,8 +16,14 @@
     <Filter Include="Source Files\Security">
       <UniqueIdentifier>{56d782e1-4b05-46f8-b812-3bb172bf9ce0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Security\Protections">
+    <Filter Include="Source Files\Security\ProtectionModules">
       <UniqueIdentifier>{f5bcb808-b875-450c-9f87-660993a3f38d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Security\Minhook">
+      <UniqueIdentifier>{48d75556-b5c2-4a00-88f4-1fe9914376a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Security\Minhook\src">
+      <UniqueIdentifier>{0734be92-f868-4b39-a1ba-1a98116b6491}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,7 +34,25 @@
       <Filter>Source Files\Security</Filter>
     </ClCompile>
     <ClCompile Include="NoDump.cpp">
-      <Filter>Source Files\Security\Protections</Filter>
+      <Filter>Source Files\Security\ProtectionModules</Filter>
+    </ClCompile>
+    <ClCompile Include="PatchHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minhook\src\buffer.c">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClCompile>
+    <ClCompile Include="minhook\src\hook.c">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClCompile>
+    <ClCompile Include="minhook\src\trampoline.c">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClCompile>
+    <ClCompile Include="minhook\src\hde\hde32.c">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClCompile>
+    <ClCompile Include="minhook\src\hde\hde64.c">
+      <Filter>Source Files\Security\Minhook\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +61,33 @@
     </ClInclude>
     <ClInclude Include="NoDump.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PatchHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\include\MinHook.h">
+      <Filter>Source Files\Security\Minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\src\buffer.h">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\src\trampoline.h">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\src\hde\hde32.h">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\src\hde\hde64.h">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\src\hde\pstdint.h">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\src\hde\table32.h">
+      <Filter>Source Files\Security\Minhook\src</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\src\hde\table64.h">
+      <Filter>Source Files\Security\Minhook\src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
