@@ -9,38 +9,27 @@ typedef struct IUnknown IUnknown;
 #include <iostream>
 #include <Windows.h>
 
-#define ERRORMSG "Error: " << __FUNCTION__ << "() "
-
 void watchdog::StartThreadIntegrity() {
-    // Run task on new thread.
-#ifdef _DEBUG
+    // Run ProtectionModules on new thread.
+	
+    typedef void (*func)();
+    func arr[]{NoDump::RunEngine, NoDump::RunEngine};
+    for (auto* x : arr) {
+        NEWTHREAD(x);
+    }
+}
+
+void watchdog::HandleException() {
     try {
-#endif
-        NEWTHREAD(NoDump::RunEngine);
-		
-#ifdef _DEBUG
+        throw;
     }
     catch (const std::runtime_error& e) {
         std::cout << ERRORMSG << "Runtime Exception: " << e.what() << std::endl;
     }
-    catch (const std::exception& e){
-		std::cout << ERRORMSG << "Exception: " << e.what() << std::endl;
-	}
-    catch (...) {
-		std::cout << ERRORMSG << "Unknown Exception!" << std::endl;
+    catch (const std::exception& e) {
+        std::cout << ERRORMSG << "Exception: " << e.what() << std::endl;
     }
-#endif
-
-
-    // Get thread status using wait_for as before.
-    //auto status = future.wait_for(0ms);
-
-    // Print status.
-    //if (status == std::future_status::ready) {
-        //std::cout << "this is a test";
-    //}
-
-    //system("pause");
-    //t.join(); // Join thread.
-    //system("pause");
+    catch (...) {
+        std::cout << ERRORMSG << "Unknown Exception!" << std::endl;
+    }
 }
