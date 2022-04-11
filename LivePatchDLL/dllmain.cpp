@@ -6,7 +6,6 @@ typedef struct IUnknown IUnknown;
 #include "watchdog.h"
 #include "PatchHelper.h"
 
-#define NEWTHREAD(x) CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)x, NULL, NULL, NULL)
 extern "C" __declspec(dllexport) int StartPatch();
 
 int StartPatch()
@@ -42,6 +41,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
         DisableThreadLibraryCalls(hModule); //prevents dll detach
 #endif
 		StartPatch();
+        break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
