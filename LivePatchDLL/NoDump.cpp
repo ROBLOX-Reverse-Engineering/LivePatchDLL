@@ -3,11 +3,13 @@
 #include "watchdog.h"
 
 void NoDump::RunEngine() {
+	const char* ModuleName = "NoDump";
+
 	try {
-		std::cout << "NoDump Module loaded!" << std::endl;
+		std::cout << "[" << ModuleName << "] Module has loaded!" << std::endl;
 	}
 	catch (...) {
-		watchdog::HandleException();
+		watchdog::HandleException(ModuleName, __FUNCTION__);
 	}
 }
 
