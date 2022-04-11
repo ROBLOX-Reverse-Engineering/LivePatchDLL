@@ -23,7 +23,11 @@ void PatchHelper::PatchString(const int address, const char stringBuffer[])
 #endif
 }
 
-void PatchHelper::PatchFunction(const int adr, const int func)
+void PatchHelper::InitializeHooks() {
+	MH_Initialize();
+}
+
+void PatchHelper::HookFunction(const int adr, const int func)
 {
 	MH_CreateHook((LPVOID)(FixAddress(adr)), (LPVOID)func, NULL);
 	MH_EnableHook((LPVOID)adr);

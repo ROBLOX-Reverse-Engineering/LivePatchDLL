@@ -21,6 +21,7 @@ int StartPatch()
 	MessageBox(0, "Press OK to start patch & anti-cheat\nThis will automatically start in non-debug builds.", "Hello", MB_OK);
 
 #endif
+    PatchHelper::InitializeHooks();
 	/*
         Insert PatchHelper calls here
     */
