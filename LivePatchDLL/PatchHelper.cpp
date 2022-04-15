@@ -8,8 +8,8 @@ void PatchHelper::PatchString(const int address, const char stringBuffer[])
 {
 	char* buffer = reinterpret_cast<char*>(FixAddress(address));
 #ifdef _DEBUG
-	std::cout << "Address: " << std::hex << address << std::endl;
-	std::cout << "Buffer: " << std::hex << buffer << std::endl;
+	std::cout << "[" << __FUNCTION__ << "] Address: " << std::hex << address << std::endl;
+	std::cout << "[" << __FUNCTION__ << "] Buffer: " << std::hex << buffer << std::endl;
 #endif
 	const size_t length = strlen(buffer) + 1;
 	DWORD oldProtect;
@@ -18,8 +18,8 @@ void PatchHelper::PatchString(const int address, const char stringBuffer[])
 	memcpy(buffer, stringBuffer, length);
 	VirtualProtect(buffer, length, oldProtect, nullptr);
 
-#ifdef _DEBUG
-	std::cout << "New Buffer: " << std::hex << (int)reinterpret_cast<char*>(FixAddress(address)) << std::endl;
+#ifdef _DEBUG 
+	std::cout << "[" << __FUNCTION__ << "] New Buffer: " << std::hex << (int)reinterpret_cast<char*>(FixAddress(address)) << std::endl;
 #endif
 }
 
@@ -30,7 +30,7 @@ void PatchHelper::InitializeHooks() {
 void PatchHelper::HookFunction(const int adr, const int func)
 {
 	MH_CreateHook((LPVOID)(FixAddress(adr)), (LPVOID)func, NULL);
-	MH_EnableHook((LPVOID)adr);
+	MH_EnableHook((LPVOID)(FixAddress(adr)));
 }
 
 void PatchHelper::DisableHook(const int adr)
