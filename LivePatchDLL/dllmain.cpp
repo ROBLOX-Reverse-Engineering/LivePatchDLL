@@ -38,9 +38,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-#ifndef _DEBUG
-        DisableThreadLibraryCalls(hModule); //prevents dll detach
-#endif
+        DisableThreadLibraryCalls(hModule); // disables DLL_THREAD* calls which should boost performance
 		StartPatch();
         break;
     case DLL_THREAD_ATTACH:
