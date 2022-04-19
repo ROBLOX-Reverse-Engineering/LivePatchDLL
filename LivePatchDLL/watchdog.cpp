@@ -8,8 +8,9 @@ typedef struct IUnknown IUnknown;
 #include <chrono>
 #include <iostream>
 #include <Windows.h>
+#include "atomic.h"
 
-volatile int LoadCount = 0;
+static atomic<int> LoadCount = 0;
 
 void watchdog::StartThreadIntegrity() {
     // Run ProtectionModules on new thread.
@@ -20,27 +21,24 @@ void watchdog::StartThreadIntegrity() {
     int const TotalLoadCount = sizeof(arr) / sizeof(arr[0]);
     std::cout << "Starting to load " << TotalLoadCount << " modules..." << std::endl;
     for (auto* x : arr) {
-        _InterlockedIncrement((long volatile*)&LoadCount);
         NEWTHREAD(x);
     }
 
-	std::cout << "Loaded " << LoadCount << "/" << TotalLoadCount << " Modules" << std::endl;
+	std::cout << "Loaded " << TotalLoadCount - LoadCount << "/" << TotalLoadCount << " Modules" << std::endl;
 }
 
 void watchdog::HandleException(const char* Module, const char* Function) {
+    LoadCount++;
     try {
         throw;
     }
     catch (const std::runtime_error& e) {
-        _InterlockedDecrement((long volatile*)&LoadCount);
         std::cout << "[" << Module << "] " << Function << "() Runtime Exception: " << e.what() << std::endl;
     }
     catch (const std::exception& e) {
-        _InterlockedDecrement((long volatile*)&LoadCount);
         std::cout << "[" << Module << "] " << Function << "() Exception: " << e.what() << std::endl;
     }
     catch (...) {
-        _InterlockedDecrement((long volatile*)&LoadCount);
         std::cout << "[" << Module << "] " << Function << "() Unknown Exception!" << std::endl;
     }
 }
