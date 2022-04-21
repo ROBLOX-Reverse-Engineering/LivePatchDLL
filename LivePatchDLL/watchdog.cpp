@@ -8,9 +8,8 @@ typedef struct IUnknown IUnknown;
 #include <chrono>
 #include <iostream>
 #include <Windows.h>
-#include "atomic.h"
 
-static atomic<int> LoadCount = 0;
+volatile long LoadCount = 0;
 
 void watchdog::StartThreadIntegrity() {
     // Run ProtectionModules on new thread.
@@ -28,7 +27,7 @@ void watchdog::StartThreadIntegrity() {
 }
 
 void watchdog::HandleException(const char* Module, const char* Function) {
-    LoadCount++;
+    _InterlockedIncrement(&LoadCount);
     try {
         throw;
     }
