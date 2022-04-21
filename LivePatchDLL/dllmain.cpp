@@ -5,6 +5,7 @@ typedef struct IUnknown IUnknown;
 #include <string>
 #include "watchdog.h"
 #include "PatchHelper.h"
+#include "Addresses.h"
 
 extern "C" __declspec(dllexport) int StartPatch();
 
@@ -22,9 +23,7 @@ int StartPatch()
 
 #endif
     PatchHelper::InitializeHooks();
-	/*
-        Insert PatchHelper calls here
-    */
+    PatchHelper::PatchString(SavedAddr::PublicKeyAddr, "ThisIsATest");
     watchdog::StartThreadIntegrity();
     
 	return 0;
