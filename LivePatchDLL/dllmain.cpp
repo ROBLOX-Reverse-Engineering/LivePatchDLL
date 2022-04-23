@@ -9,8 +9,10 @@ typedef struct IUnknown IUnknown;
 
 extern "C" __declspec(dllexport) int StartPatch();
 
+#ifdef _DEBUG
 FILE* ostream;
 FILE* istream;
+#endif
 
 // thread starts work after unpacking seemingly every time. lucky? windows dll loader quirk?
 int StartPatch()
@@ -22,8 +24,8 @@ int StartPatch()
 	SetConsoleTitle("Debug Console");
 	std::cout << "Hello, world!" << std::endl;
 	MessageBox(0, "Press OK to start patch & anti-cheat\nThis will automatically start in non-debug builds.", "Hello", MB_OK);
-
 #endif
+
     PatchHelper::InitializeHooks();
     /*
         Insert PatchHelper calls here
@@ -48,9 +50,11 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
+#ifdef _DEBUG
         // close I/O handles to avoid issues
         CloseHandle(istream);
         CloseHandle(ostream);
+#endif
 
         break;
     }
