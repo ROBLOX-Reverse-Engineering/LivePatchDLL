@@ -5,15 +5,18 @@ typedef struct IUnknown IUnknown;
 #include <string>
 #include "watchdog.h"
 #include "PatchHelper.h"
+#include "Addresses.h"
 
 extern "C" __declspec(dllexport) int StartPatch();
 
+FILE* ostream;
+FILE* istream;
+
+// thread starts work after unpacking seemingly every time. lucky? windows dll loader quirk?
 int StartPatch()
 {
 #ifdef _DEBUG
 	AllocConsole();
-	FILE *ostream;
-	FILE *istream;
 	freopen_s(&ostream, "CONOUT$", "w", stdout);
 	freopen_s(&istream, "CONIN$", "r", stdin);
 	SetConsoleTitle("Debug Console");
@@ -22,7 +25,7 @@ int StartPatch()
 
 #endif
     PatchHelper::InitializeHooks();
-	/*
+    /*
         Insert PatchHelper calls here
     */
     watchdog::StartThreadIntegrity();
@@ -38,12 +41,17 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        DisableThreadLibraryCalls(hModule); // disables DLL_THREAD* calls which should boost performance
-		StartPatch();
+        DisableThreadLibraryCalls(hModule);
+        CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(StartPatch), nullptr, 0, nullptr);
+
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
+        // close I/O handles to avoid issues
+        CloseHandle(istream);
+        CloseHandle(ostream);
+
         break;
     }
     return TRUE;

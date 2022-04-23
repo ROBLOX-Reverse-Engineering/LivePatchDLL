@@ -20,7 +20,7 @@ void watchdog::StartThreadIntegrity() {
     int const TotalLoadCount = sizeof(arr) / sizeof(arr[0]);
     std::cout << "Starting to load " << TotalLoadCount << " modules..." << std::endl;
     for (auto* x : arr) {
-        NEWTHREAD(x);
+        std::thread(x);
     }
 
 	std::cout << "Loaded " << TotalLoadCount - LoadCount << "/" << TotalLoadCount << " Modules" << std::endl;
