@@ -4,7 +4,13 @@ typedef struct IUnknown IUnknown;
 #include "PatchHelper.h"
 #include "minhook\include\MinHook.h"
 
-void PatchHelper::PatchString(const int address, const char stringBuffer[])
+[[deprecated("PatchString is deprecated, use PatchBytes instead. This function will be removed in future builds")]] 
+__inline void PatchHelper::PatchString(const int address, const char stringBuffer[])
+{
+	PatchBytes(address, stringBuffer);
+}
+
+void PatchHelper::PatchBytes(const int address, const char bytesBuffer[])
 {
 	char* buffer = reinterpret_cast<char*>(FixAddress(address));
 #ifdef _DEBUG
@@ -15,7 +21,26 @@ void PatchHelper::PatchString(const int address, const char stringBuffer[])
 	DWORD oldProtect;
 
 	VirtualProtect(buffer, length, PAGE_EXECUTE_READWRITE, &oldProtect);
-	memcpy(buffer, stringBuffer, length);
+	memcpy(buffer, bytesBuffer, length);
+	VirtualProtect(buffer, length, oldProtect, nullptr);
+
+#ifdef _DEBUG 
+	std::cout << "[" << __FUNCTION__ << "] New Buffer: " << std::hex << (int)reinterpret_cast<char*>(FixAddress(address)) << std::endl;
+#endif
+}
+
+void PatchHelper::PatchByte(const int address, const char byte)
+{
+	char* buffer = reinterpret_cast<char*>(FixAddress(address));
+#ifdef _DEBUG
+	std::cout << "[" << __FUNCTION__ << "] Address: " << std::hex << address << std::endl;
+	std::cout << "[" << __FUNCTION__ << "] Buffer: " << std::hex << buffer << std::endl;
+#endif
+	const size_t length = sizeof(byte);
+	DWORD oldProtect;
+
+	VirtualProtect(buffer, length, PAGE_EXECUTE_READWRITE, &oldProtect);
+	*(BYTE*)(buffer) = byte;
 	VirtualProtect(buffer, length, oldProtect, nullptr);
 
 #ifdef _DEBUG 
