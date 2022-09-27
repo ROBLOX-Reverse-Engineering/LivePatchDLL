@@ -25,16 +25,40 @@
     <Filter Include="Source Files\Security\Minhook\src">
       <UniqueIdentifier>{0734be92-f868-4b39-a1ba-1a98116b6491}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Security">
+      <UniqueIdentifier>{c69b4395-c8b8-4b50-b38c-93c3bf828fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Security\ProtectionModules">
+      <UniqueIdentifier>{6ccc7834-2c52-48ec-ba76-1860d0c60474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{ec937277-d7c6-4318-9239-427be0497859}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{d097cf4c-b9e1-4a12-bb8b-01367fc18adf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Security\ProtectionModules\ClientManager">
+      <UniqueIdentifier>{be55021c-2e21-48f4-9bee-b21123e35ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Security\ProtectionModules\ClientManager">
+      <UniqueIdentifier>{65d41ae4-bc9f-437c-8665-3363731c093e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Security\ProtectionModules\Base">
+      <UniqueIdentifier>{d4590134-be0a-4423-9aa5-148f4f9d4dd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Security\ProtectionModules\Base">
+      <UniqueIdentifier>{ac8db47c-d1dc-4131-bb6d-960ba4b4de5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Security\ProtectionModules\NoDump">
+      <UniqueIdentifier>{2996812e-9222-48ca-aad0-53795b527f25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Security\ProtectionModules\NoDump">
+      <UniqueIdentifier>{29d07a04-d65a-448f-abcb-8a0a70501a67}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="watchdog.cpp">
-      <Filter>Source Files\Security</Filter>
-    </ClCompile>
-    <ClCompile Include="NoDump.cpp">
-      <Filter>Source Files\Security\ProtectionModules</Filter>
     </ClCompile>
     <ClCompile Include="PatchHelper.cpp">
       <Filter>Source Files</Filter>
@@ -54,17 +78,26 @@
     <ClCompile Include="minhook\src\hde\hde64.c">
       <Filter>Source Files\Security\Minhook\src</Filter>
     </ClCompile>
+    <ClCompile Include="WatchDog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Base\ModuleBase.cpp">
+      <Filter>Source Files\Security\ProtectionModules\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\NoDump\NoDump.cpp">
+      <Filter>Source Files\Security\ProtectionModules\NoDump</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\ClientManager\ClientManager.cpp">
+      <Filter>Source Files\Security\ProtectionModules\ClientManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\ClientManager\ClientManagerBase.cpp">
+      <Filter>Source Files\Security\ProtectionModules\ClientManager</Filter>
+    </ClCompile>
+    <ClCompile Include="format_string.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="watchdog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NoDump.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PatchHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="minhook\include\MinHook.h">
       <Filter>Source Files\Security\Minhook</Filter>
     </ClInclude>
@@ -89,8 +122,29 @@
     <ClInclude Include="minhook\src\hde\table64.h">
       <Filter>Source Files\Security\Minhook\src</Filter>
     </ClInclude>
-    <ClInclude Include="Addresses.h">
+    <ClInclude Include="Modules\Base\ModuleBase.h">
+      <Filter>Header Files\Security\ProtectionModules\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\NoDump\NoDump.h">
+      <Filter>Header Files\Security\ProtectionModules\NoDump</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\ClientManager\ClientManager.h">
+      <Filter>Header Files\Security\ProtectionModules\ClientManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\ClientManager\ClientManagerBase.h">
+      <Filter>Header Files\Security\ProtectionModules\ClientManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Addresses.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PatchHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WatchDog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\format_string.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

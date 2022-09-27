@@ -1,14 +1,13 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
-typedef struct IUnknown IUnknown;
 #include <windows.h>
 #include <iostream>
 #include <string>
 #include "watchdog.h"
 #include "PatchHelper.h"
 
-extern "C" __declspec(dllexport) int StartPatch();
+extern "C" __declspec(dllexport) int StartPatch(WatchDog* const watchdog);
 
-int StartPatch()
+int StartPatch(WatchDog* const watchdog)
 {
 #ifdef _DEBUG
 	AllocConsole();
@@ -17,18 +16,17 @@ int StartPatch()
 	freopen_s(&ostream, "CONOUT$", "w", stdout);
 	freopen_s(&istream, "CONIN$", "r", stdin);
 	SetConsoleTitle("Debug Console");
-	std::cout << "Hello, world!" << std::endl;
+	WatchDog::singleton()->print("Hello, world!");
 	MessageBox(0, "Press OK to start patch & anti-cheat\nThis will automatically start in non-debug builds.", "Hello", MB_OK);
 
 #endif
     PatchHelper::InitializeHooks();
-	/*
-        Insert PatchHelper calls here
-    */
-    watchdog::StartThreadIntegrity();
+
+    watchdog->startThreadIntegrity();
     
 	return 0;
 }
+
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -39,11 +37,13 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     {
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(hModule); // disables DLL_THREAD* calls which should boost performance
-		StartPatch();
+		StartPatch(WatchDog::singleton());
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
+        break;
     case DLL_PROCESS_DETACH:
+        WatchDog::freeSingleton();
         break;
     }
     return TRUE;

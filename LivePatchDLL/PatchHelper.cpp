@@ -3,67 +3,54 @@ typedef struct IUnknown IUnknown;
 #include <windows.h>
 #include "PatchHelper.h"
 #include "minhook\include\MinHook.h"
+#include "WatchDog.h"
 
-[[deprecated("PatchString is deprecated, use PatchBytes instead. This function will be removed in future builds")]] 
-__inline void PatchHelper::PatchString(const int address, const char stringBuffer[])
-{
-	PatchBytes(address, stringBuffer);
-}
+std::mutex PatchHelper::heapMutex;
 
-void PatchHelper::PatchBytes(const int address, const char bytesBuffer[])
+void PatchHelper::PatchBytes(const unsigned int address, const char bytesBuffer[])
 {
-	char* buffer = reinterpret_cast<char*>(FixAddress(address));
+	char* const buffer = (char* const)FixAddress(address);
 #ifdef _DEBUG
-	std::cout << "[" << __FUNCTION__ << "] Address: " << std::hex << address << std::endl;
-	std::cout << "[" << __FUNCTION__ << "] Buffer: " << std::hex << buffer << std::endl;
+	WatchDog::singleton()->printf("[%s] Address: %x", __FUNCTION__, (unsigned int)address);
+	WatchDog::singleton()->printf("[%s] Buffer: \"%s\"", __FUNCTION__, buffer);
 #endif
 	const size_t length = strlen(buffer) + 1;
 	DWORD oldProtect;
 
+	std::lock_guard<std::mutex> guard(PatchHelper::heapMutex);
+
+	// TODO: This might have to be called if we want to destruct std::strings given to us on our end
 	VirtualProtect(buffer, length, PAGE_EXECUTE_READWRITE, &oldProtect);
 	memcpy(buffer, bytesBuffer, length);
 	VirtualProtect(buffer, length, oldProtect, nullptr);
 
 #ifdef _DEBUG 
-	std::cout << "[" << __FUNCTION__ << "] New Buffer: " << std::hex << (int)reinterpret_cast<char*>(FixAddress(address)) << std::endl;
+	WatchDog::singleton()->printf("[%s] New Buffer: \"%s\"", __FUNCTION__, buffer);
 #endif
 }
 
-void PatchHelper::PatchByte(const int address, const char byte)
-{
-	char* buffer = reinterpret_cast<char*>(FixAddress(address));
-#ifdef _DEBUG
-	std::cout << "[" << __FUNCTION__ << "] Address: " << std::hex << address << std::endl;
-	std::cout << "[" << __FUNCTION__ << "] Buffer: " << std::hex << buffer << std::endl;
-#endif
-	const size_t length = sizeof(byte);
-	DWORD oldProtect;
-
-	VirtualProtect(buffer, length, PAGE_EXECUTE_READWRITE, &oldProtect);
-	*(BYTE*)(buffer) = byte;
-	VirtualProtect(buffer, length, oldProtect, nullptr);
-
-#ifdef _DEBUG 
-	std::cout << "[" << __FUNCTION__ << "] New Buffer: " << std::hex << (int)reinterpret_cast<char*>(FixAddress(address)) << std::endl;
-#endif
-}
 
 void PatchHelper::InitializeHooks() {
 	MH_Initialize();
 }
 
-void PatchHelper::HookFunction(const int adr, const int func)
+
+void PatchHelper::HookFunction(const unsigned int adr, const unsigned int func, const unsigned int& orig)
 {
-	MH_CreateHook((LPVOID)(FixAddress(adr)), (LPVOID)func, NULL);
+	std::lock_guard<std::mutex> guard(PatchHelper::heapMutex);
+
+	MH_CreateHook((LPVOID)(FixAddress(adr)), (LPVOID)func, (LPVOID*)orig);
 	MH_EnableHook((LPVOID)(FixAddress(adr)));
 }
 
-void PatchHelper::DisableHook(const int adr)
+
+void PatchHelper::DisableHook(const unsigned int adr)
 {
 	MH_DisableHook((LPVOID)adr);
 }
 
-void PatchHelper::EnableHook(const int adr)
+
+void PatchHelper::EnableHook(const unsigned int adr)
 {
 	MH_EnableHook((LPVOID)adr);
 }

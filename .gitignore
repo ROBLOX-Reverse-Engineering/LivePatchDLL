@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Custom
+./Clients
+/Clients
+/LivePatchDLL/modules/ClientManager
