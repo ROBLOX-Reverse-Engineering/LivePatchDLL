@@ -1,4 +1,3 @@
-#include <iostream>
 #include "NoDump.h"
 
 NoDump::NoDump()
@@ -9,11 +8,12 @@ NoDump::NoDump()
 {
 }
 
-void NoDump::StartModule()
+
+void NoDump::startModule()
 {
 	ModuleBase::startModule();
 
-
+	print("Welcome to the NoDump module!\nThis is just an example module.");
 
 	initEndEvent();
 }

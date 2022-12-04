@@ -1,11 +1,11 @@
-typedef struct IUnknown IUnknown;
-#include <iostream>
 #include <windows.h>
 #include "PatchHelper.h"
 #include "minhook\include\MinHook.h"
 #include "WatchDog.h"
 
+
 std::mutex PatchHelper::heapMutex;
+
 
 void PatchHelper::PatchBytes(const unsigned int address, const char bytesBuffer[])
 {

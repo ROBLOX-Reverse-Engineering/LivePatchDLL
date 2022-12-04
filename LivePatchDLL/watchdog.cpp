@@ -1,4 +1,3 @@
-typedef struct IUnknown IUnknown;
 #include <future>
 #include <thread>
 #include <iostream>
@@ -27,9 +26,10 @@ void WatchDog::freeSingleton()
 WatchDog::WatchDog()
 {
     moduleThreads = std::vector<std::thread*>();
-    modules = std::vector<ModuleBase*>();
-    modules.push_back(new NoDump());
-    //modules.push_back(new ClientManager());
+    modules = std::vector<ModuleBase*>{
+        new NoDump(),
+        new ClientManager()
+    };
 }
 
 
