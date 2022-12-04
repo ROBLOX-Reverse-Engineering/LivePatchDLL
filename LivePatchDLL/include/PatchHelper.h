@@ -6,6 +6,7 @@
 class PatchHelper
 {
 #define FixAddress(addr) (addr - IMAGE_BASE) + (DWORD)GetModuleHandle(NULL)
+#define FixHook(addr) addr + (DWORD)GetModuleHandle(NULL)
 
 public:
 	// Requires that every thread waits their turn in order to write to the heap
