@@ -3,7 +3,6 @@
 #include "minhook\include\MinHook.h"
 #include "WatchDog.h"
 
-
 std::mutex PatchHelper::heapMutex;
 
 
