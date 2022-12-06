@@ -363,6 +363,3 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Custom
-./Clients
-/Clients
-/LivePatchDLL/modules/ClientManager

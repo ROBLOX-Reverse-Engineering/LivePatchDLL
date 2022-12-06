@@ -7,6 +7,7 @@
 
 extern "C" __declspec(dllexport) int StartPatch(WatchDog* const watchdog);
 
+
 int StartPatch(WatchDog* const watchdog)
 {
 #ifdef _DEBUG

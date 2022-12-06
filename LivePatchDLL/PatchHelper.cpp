@@ -1,11 +1,10 @@
-typedef struct IUnknown IUnknown;
-#include <iostream>
 #include <windows.h>
 #include "PatchHelper.h"
 #include "minhook\include\MinHook.h"
 #include "WatchDog.h"
 
 std::mutex PatchHelper::heapMutex;
+
 
 void PatchHelper::PatchBytes(const unsigned int address, const char bytesBuffer[])
 {
@@ -39,8 +38,8 @@ void PatchHelper::HookFunction(const unsigned int adr, const unsigned int func, 
 {
 	std::lock_guard<std::mutex> guard(PatchHelper::heapMutex);
 
-	MH_CreateHook((LPVOID)(FixAddress(adr)), (LPVOID)func, (LPVOID*)orig);
-	MH_EnableHook((LPVOID)(FixAddress(adr)));
+	MH_CreateHook((LPVOID)(FixHook(adr)), (LPVOID)func, (LPVOID*)orig);
+	MH_EnableHook((LPVOID)(FixHook(adr)));
 }
 
 
