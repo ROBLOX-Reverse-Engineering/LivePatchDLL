@@ -146,5 +146,14 @@
     <ClInclude Include="include\format_string.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="old_string.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="lpstring.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

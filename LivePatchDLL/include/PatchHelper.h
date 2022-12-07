@@ -1,7 +1,7 @@
 #pragma once
 #include <mutex>
 
-#define IMAGE_BASE 0x00400000
+#define IMAGE_BASE 0x400000
 
 class PatchHelper
 {

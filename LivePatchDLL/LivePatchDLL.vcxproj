@@ -182,6 +182,7 @@
     <ClCompile Include="WatchDog.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="include\Addresses.h" />
     <ClInclude Include="include\format_string.h" />
     <ClInclude Include="include\PatchHelper.h" />
@@ -198,6 +199,8 @@
     <ClInclude Include="Modules\ClientManager\ClientManager.h" />
     <ClInclude Include="Modules\ClientManager\ClientManagerBase.h" />
     <ClInclude Include="Modules\NoDump\NoDump.h" />
+    <ClInclude Include="old_string.h" />
+    <ClInclude Include="lpstring.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
