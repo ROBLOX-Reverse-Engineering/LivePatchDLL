@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Globals.h"
+
 // Version-Based Address
 #define VERSION_ADDR(ver, addr) ver == APP_VERSION ? addr : 
 // Defines an address with the given name and value
