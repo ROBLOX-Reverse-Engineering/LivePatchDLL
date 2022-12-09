@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
 
+// Credits: https://www.unknowncheats.me/forum/battlefield-2/72875-bf2-std-library-vs-2005-08-and-10-a.html
+
 namespace old
 {
 	class string 

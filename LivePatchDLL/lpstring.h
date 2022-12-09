@@ -3,6 +3,8 @@
 #include "old_string.h"
 #include "Globals.h"
 
+#define LPSTRING(name) std::string(((string*)&name)->c_str())
+
 class string :
 #ifdef VS2008
 	public old::string
