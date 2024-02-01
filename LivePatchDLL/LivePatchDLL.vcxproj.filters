@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Security\ProtectionModules\NoDump">
       <UniqueIdentifier>{29d07a04-d65a-448f-abcb-8a0a70501a67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Security\ProtectionModules\Thumbs">
+      <UniqueIdentifier>{4f11168e-3054-438a-9285-1449d35d6535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Security\ProtectionModules\Thumbs">
+      <UniqueIdentifier>{328eb2cd-22b5-46dc-9348-68758b6e1007}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -95,6 +101,12 @@
     </ClCompile>
     <ClCompile Include="format_string.cpp">
       <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ThumbnailModule.cpp">
+      <Filter>Source Files\Security\ProtectionModules\Thumbs</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyWindow.cpp">
+      <Filter>Source Files\Security\ProtectionModules\Thumbs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +166,18 @@
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ThumbnailModule.h">
+      <Filter>Header Files\Security\ProtectionModules\Thumbs</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyWindow.h">
+      <Filter>Header Files\Security\ProtectionModules\Thumbs</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewBaseFactory.h">
+      <Filter>Header Files\Security\ProtectionModules\Thumbs</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSettings.h">
+      <Filter>Header Files\Security\ProtectionModules\Thumbs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

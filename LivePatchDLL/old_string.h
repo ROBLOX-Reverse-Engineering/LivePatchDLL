@@ -1,12 +1,16 @@
 #pragma once
 #include <memory>
+#include "Globals.h"
 
 // Credits: https://www.unknowncheats.me/forum/battlefield-2/72875-bf2-std-library-vs-2005-08-and-10-a.html
 
+#ifdef VS2008
 namespace old
 {
 	class string 
 	{	
+		using Allocator = std::allocator<char>;
+
 	public:
  
 		enum
@@ -15,12 +19,12 @@ namespace old
 			_ALLOC_MASK = sizeof (char) <= 1 ? 15 : sizeof (char) <= 2 ? 7 : sizeof (char) <= 4 ? 3 : sizeof (char) <= 8 ? 1 : 0,
 		};		
 						
-		string() : _Alval(std::allocator<char>::template rebind<char>::other()) 
+		string() : _Alval(Allocator::template rebind<char>::other()) 
 		{	
 			_Tidy();
 		}
  
-		string(const char* _Ptr) : _Alval(std::allocator<char>::template rebind<char>::other()) 
+		string(const char* _Ptr) : _Alval(Allocator::template rebind<char>::other()) 
 		{	
 			_Tidy();
 			assign(_Ptr, std::char_traits<char>::length(_Ptr));
@@ -41,7 +45,7 @@ namespace old
 			return (_BUF_SIZE <= _Myres ? _Bx._Ptr : _Bx._Buf);
 		}
  
-		void  _Tidy(bool _Built = false, std::allocator<char>::size_type _Newsize = 0)
+		void  _Tidy(bool _Built = false, std::allocator_traits<Allocator>::size_type _Newsize = 0)
 		{	
 			if (!_Built)
 			{
@@ -60,7 +64,7 @@ namespace old
 			_Eos(_Newsize);
 		}
  
-		string& assign(const char* _Ptr, std::allocator<char>::size_type _Count)
+		string& assign(const char* _Ptr, std::allocator_traits<Allocator>::size_type _Count)
 		{	
 			if (_Grow(_Count))
 			{	
@@ -71,7 +75,7 @@ namespace old
 			return (*this);
 		}
  
-		bool _Grow(std::allocator<char>::size_type _Newsize, bool _Trim = false)
+		bool _Grow(std::allocator_traits<Allocator>::size_type _Newsize, bool _Trim = false)
 		{	
 			if (max_size() < _Newsize)
 			{
@@ -94,9 +98,9 @@ namespace old
 			return (0 < _Newsize);	
 		}
  
-		std::allocator<char>::size_type max_size() const
+		std::allocator_traits<Allocator>::size_type max_size() const
 		{	
-			return (_Alval.max_size() <= 1 ? 1 : _Alval.max_size() - 1);
+			return (_AlTraits.max_size(_Alval) <= 1 ? 1 : _AlTraits.max_size(_Alval) - 1);
 		}
  
 		static char* copy(char* _First1, const char* _First2, size_t _Count)
@@ -104,9 +108,9 @@ namespace old
 			return ((char *)_CSTD memcpy(_First1, _First2, _Count));
 		}
  
-		void _Copy(std::allocator<char>::size_type _Newsize, std::allocator<char>::size_type _Oldlen)
+		void _Copy(std::allocator_traits<Allocator>::size_type _Newsize, std::allocator_traits<Allocator>::size_type _Oldlen)
 		{	
-			std::allocator<char>::size_type _Newres = _Newsize | _ALLOC_MASK;
+			std::allocator_traits<Allocator>::size_type _Newres = _Newsize | _ALLOC_MASK;
  
 			if (max_size() < _Newres)
 			{
@@ -140,7 +144,7 @@ namespace old
 			_Eos(_Oldlen);
 		}
 			
-		void _Eos(std::allocator<char>::size_type _Newsize)
+		void _Eos(std::allocator_traits<Allocator>::size_type _Newsize)
 		{	
 			std::char_traits<char>::assign((char)_Myptr()[_Mysize = _Newsize], char());
 		}
@@ -155,7 +159,8 @@ namespace old
  
 	protected:
  
-		std::allocator<char>::template rebind<char>::other _Alval;
+		std::allocator_traits<Allocator>::template rebind_alloc<char> _Alval;
+		std::allocator_traits<Allocator>::template rebind_traits<char> _AlTraits;
  
 		union _Bxty
 		{	
@@ -163,8 +168,8 @@ namespace old
 			char* _Ptr;
 		} _Bx;
  
-		std::allocator<char>::size_type _Mysize;
-		std::allocator<char>::size_type _Myres;
+		std::allocator_traits<Allocator>::size_type _Mysize;
+		std::allocator_traits<Allocator>::size_type _Myres;
 	};
  
 	template <class T, class Y>
@@ -321,3 +326,4 @@ namespace old
 		void* unk3;
 	};		
 };
+#endif

@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=0;WIN32;_DEBUG;LIVEPATCHDLL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>.\;.\include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -129,7 +129,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;LIVEPATCHDLL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>.\;.\include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -174,10 +174,15 @@
     <ClCompile Include="minhook\src\hde\hde64.c" />
     <ClCompile Include="minhook\src\hook.c" />
     <ClCompile Include="minhook\src\trampoline.c" />
+    <ClCompile Include="modules\ApplicationManager\ApplicationManager.cpp" />
+    <ClCompile Include="modules\ApplicationManager\ApplicationManagerBase.cpp" />
     <ClCompile Include="Modules\Base\ModuleBase.cpp" />
     <ClCompile Include="Modules\ClientManager\ClientManager.cpp" />
     <ClCompile Include="Modules\ClientManager\ClientManagerBase.cpp" />
     <ClCompile Include="Modules\NoDump\NoDump.cpp" />
+    <ClCompile Include="modules\Thumbs\DummyWindow.cpp" />
+    <ClCompile Include="modules\Thumbs\ThumbnailModule.cpp" />
+    <ClCompile Include="modules\Thumbs\ThumbnailModuleBase.cpp" />
     <ClCompile Include="PatchHelper.cpp" />
     <ClCompile Include="WatchDog.cpp" />
   </ItemGroup>
@@ -195,10 +200,17 @@
     <ClInclude Include="minhook\src\hde\table32.h" />
     <ClInclude Include="minhook\src\hde\table64.h" />
     <ClInclude Include="minhook\src\trampoline.h" />
+    <ClInclude Include="modules\ApplicationManager\ApplicationManager.h" />
+    <ClInclude Include="modules\ApplicationManager\ApplicationManagerBase.h" />
     <ClInclude Include="Modules\Base\ModuleBase.h" />
     <ClInclude Include="Modules\ClientManager\ClientManager.h" />
     <ClInclude Include="Modules\ClientManager\ClientManagerBase.h" />
     <ClInclude Include="Modules\NoDump\NoDump.h" />
+    <ClInclude Include="modules\Thumbs\DummyWindow.h" />
+    <ClInclude Include="modules\Thumbs\RenderSettings.h" />
+    <ClInclude Include="modules\Thumbs\ThumbnailModule.h" />
+    <ClInclude Include="modules\Thumbs\ThumbnailModuleBase.h" />
+    <ClInclude Include="modules\Thumbs\ViewBaseFactory.h" />
     <ClInclude Include="old_string.h" />
     <ClInclude Include="lpstring.h" />
   </ItemGroup>
