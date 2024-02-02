@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Security\ProtectionModules\Thumbs">
       <UniqueIdentifier>{328eb2cd-22b5-46dc-9348-68758b6e1007}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Security\ProtectionModules\ApplicationManager">
+      <UniqueIdentifier>{479508bb-d6d1-4f66-9aae-17e17b748448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Security\ProtectionModules\ApplicationManager">
+      <UniqueIdentifier>{74d3299e-ce26-40f6-8eb5-52d0bc4b6917}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -102,11 +108,20 @@
     <ClCompile Include="format_string.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="ThumbnailModule.cpp">
+    <ClCompile Include="modules\Thumbs\DummyWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\Thumbs\ThumbnailModule.cpp">
       <Filter>Source Files\Security\ProtectionModules\Thumbs</Filter>
     </ClCompile>
-    <ClCompile Include="DummyWindow.cpp">
+    <ClCompile Include="modules\Thumbs\ThumbnailModuleBase.cpp">
       <Filter>Source Files\Security\ProtectionModules\Thumbs</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\ApplicationManager\ApplicationManager.cpp">
+      <Filter>Source Files\Security\ProtectionModules\ApplicationManager</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\ApplicationManager\ApplicationManagerBase.cpp">
+      <Filter>Source Files\Security\ProtectionModules\ApplicationManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,17 +182,26 @@
     <ClInclude Include="Globals.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="ThumbnailModule.h">
+    <ClInclude Include="modules\Thumbs\DummyWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\Thumbs\RenderSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\Thumbs\ViewBaseFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\Thumbs\ThumbnailModule.h">
       <Filter>Header Files\Security\ProtectionModules\Thumbs</Filter>
     </ClInclude>
-    <ClInclude Include="DummyWindow.h">
+    <ClInclude Include="modules\Thumbs\ThumbnailModuleBase.h">
       <Filter>Header Files\Security\ProtectionModules\Thumbs</Filter>
     </ClInclude>
-    <ClInclude Include="ViewBaseFactory.h">
-      <Filter>Header Files\Security\ProtectionModules\Thumbs</Filter>
+    <ClInclude Include="modules\ApplicationManager\ApplicationManager.h">
+      <Filter>Header Files\Security\ProtectionModules\ApplicationManager</Filter>
     </ClInclude>
-    <ClInclude Include="RenderSettings.h">
-      <Filter>Header Files\Security\ProtectionModules\Thumbs</Filter>
+    <ClInclude Include="modules\ApplicationManager\ApplicationManagerBase.h">
+      <Filter>Header Files\Security\ProtectionModules\ApplicationManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
