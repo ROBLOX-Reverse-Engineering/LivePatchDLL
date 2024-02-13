@@ -1,7 +1,8 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
+// NOTE: Conformance mode was disabled for the project to prevent errors
+// when targetting XP.
 #include <windows.h>
 #include <iostream>
-#include <string>
 #include "watchdog.h"
 #include "PatchHelper.h"
 

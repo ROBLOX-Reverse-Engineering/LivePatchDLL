@@ -7,6 +7,8 @@
 // Start Protections
 #include "modules/NoDump/NoDump.h"
 #include "modules/ClientManager/ClientManager.h"
+#include "modules/ApplicationManager/ApplicationManager.h"
+#include "modules/Thumbs/ThumbnailModule.h"
 // End Protections
 
 
@@ -28,7 +30,9 @@ WatchDog::WatchDog()
     moduleThreads = std::vector<std::thread*>();
     modules = std::vector<ModuleBase*>{
         new NoDump(),
-        new ClientManager()
+        new ClientManager(),
+        new ApplicationManager(),
+        new ThumbnailModule()
     };
 }
 

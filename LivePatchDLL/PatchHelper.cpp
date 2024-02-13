@@ -2,13 +2,14 @@
 #include "PatchHelper.h"
 #include "minhook\include\MinHook.h"
 #include "WatchDog.h"
+#include "Addresses.h"
 
 std::mutex PatchHelper::heapMutex;
 
 
-void PatchHelper::PatchBytes(const unsigned int address, const char bytesBuffer[])
+void PatchHelper::PatchBytes(const unsigned int address, const char *bytesBuffer)
 {
-	char* const buffer = (char* const)FixAddress(address);
+	char* const buffer = (char* const)RVA(address);
 #ifdef _DEBUG
 	WatchDog::singleton()->printf("[%s] Address: %x", __FUNCTION__, (unsigned int)address);
 	WatchDog::singleton()->printf("[%s] Buffer: \"%s\"", __FUNCTION__, buffer);
@@ -38,8 +39,10 @@ void PatchHelper::HookFunction(const unsigned int adr, const unsigned int func, 
 {
 	std::lock_guard<std::mutex> guard(PatchHelper::heapMutex);
 
-	MH_CreateHook((LPVOID)(FixHook(adr)), (LPVOID)func, (LPVOID*)orig);
-	MH_EnableHook((LPVOID)(FixHook(adr)));
+	const unsigned int address = RVA(adr);
+
+	MH_CreateHook((LPVOID)(address), (LPVOID)func, (LPVOID*)orig);
+	MH_EnableHook((LPVOID)(address));
 }
 
 

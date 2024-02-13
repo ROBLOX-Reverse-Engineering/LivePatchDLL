@@ -1,3 +1,3 @@
 [submodule "LivePatchDLL/modules/ClientManager"]
 	path = LivePatchDLL/modules/ClientManager
-	url = https://github.com/RobloxLabs/ClientManager.git
+	url = https://github.com/ROBLOX-Reverse-Engineering/ClientManager.git
